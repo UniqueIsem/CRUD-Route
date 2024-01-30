@@ -1,0 +1,24 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Route" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/lightGray</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorOnPrimary">@color/darkRed</item>
+        <!-- Secondariy brand color -->
+        <item name="colorSecondary">@color/black</item>
+        <item name="colorSecondaryVariant">@color/darkGray</item>
+        <item name="colorOnSecondary">@color/red</item>
+        <!-- Status bar color -->
+
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <!--<style name="Theme.Route" parent="Base.Theme.Route" />-->
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/lightGray</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/motocicletablack</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.Route</item>
+    </style>
+</resources>
