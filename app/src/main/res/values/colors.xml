@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--App Colors-->
     <color name="black">#020202</color>
     <color name="darkGray">#19191a</color>
     <color name="gray">#9e9e9e</color>
@@ -8,4 +9,8 @@
     <color name="darkRed">#B52424</color>
     <color name="red">#ee0e0e</color>
     <color name="lightRed">#ee4242</color>
+
+    <!--Inclination Minigame Colors-->
+    <color name="green">#2ecc71</color>
+    <color name="yellow">#ffc300</color>
 </resources>

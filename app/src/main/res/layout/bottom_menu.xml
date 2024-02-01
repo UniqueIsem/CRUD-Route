@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal"
+    android:background="@color/darkRed"
+    android:layout_gravity="bottom">
+
+    <Button
+        android:id="@+id/btnMore"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:backgroundTint="@color/darkRed"
+        android:text="..."
+        android:textSize="30sp"
+        android:textColor="@color/lightGray"
+        android:layout_gravity="center"
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/btnCreateRoute"
+        android:layout_width="10dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:backgroundTint="@color/lightGray"
+        android:text="+"
+        android:textSize="30sp"
+        android:textColor="@color/darkRed"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="50dp"
+        />
+
+    <Button
+        android:id="@+id/inProcess"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:backgroundTint="@color/darkRed"
+        android:text="profile"
+        android:textSize="15sp"
+        android:textColor="@color/lightGray"
+        android:layout_gravity="center" />
+</LinearLayout>

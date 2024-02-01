@@ -4,10 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import android.widget.ToggleButton
+import com.example.crud_route.HomePage
 import com.example.crud_route.R
 import com.google.firebase.auth.FirebaseAuth
 
@@ -43,10 +45,10 @@ class Login : AppCompatActivity() {
             val email = email.text.toString()
             val pswrd = password.text.toString()
 
-            if (email.isNotEmpty() && pswrd.isNotEmpty() ) {
-                signIn(email, pswrd)
+            if (email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches() && pswrd.isNotEmpty()) {
+                logIn(email, pswrd)
             } else {
-                Toast.makeText(this, "Complete all fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Complete all fields with valid email", Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -56,12 +58,12 @@ class Login : AppCompatActivity() {
         })
     }
 
-    private fun signIn(email: String, password: String) {
+    private fun logIn(email: String, password: String) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "Successfull Log in", Toast.LENGTH_SHORT).show()
-                    // Redirect to Home Page
+                    startActivity(Intent(this, HomePage::class.java))
+                    Toast.makeText(this@Login, "Inicio de sesion exitoso", Toast.LENGTH_SHORT).show()
                     finish()
                 } else {
                     Toast.makeText(this, "Log in failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()

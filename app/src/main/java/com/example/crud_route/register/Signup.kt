@@ -50,7 +50,7 @@ class Signup : AppCompatActivity() {
             val confirmPassword = confirmPassword.text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
-                if (password.equals(confirmPassword)) {
+                if (password.equals(confirmPassword)) { //succesfull sign up
                     signUp(email, password)
                 } else {
                     Toast.makeText(this, "The password doesn't match", Toast.LENGTH_SHORT).show()
@@ -77,7 +77,7 @@ class Signup : AppCompatActivity() {
                     }
                 }
         } else {
-            // El formato del correo electrónico no es válido
+            // invalid format email
             Toast.makeText(this, "Invalid email address", Toast.LENGTH_SHORT).show()
         }
     }
