@@ -7,8 +7,11 @@ import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.Button
 import androidx.core.app.ActivityCompat
+import com.example.crud_route.fragments.FragmentDetail
+import com.example.crud_route.fragments.FragmentList
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -25,7 +28,7 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var btnMore: Button
     private lateinit var btnCreateRoute: Button
-    //private lateinit var btnProcess: Button
+    //private lateinit var btnProfile: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +38,22 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+        val listFragment = FragmentList()
+        val detailFragment = FragmentDetail()
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.flFragment, listFragment)
+            commit()
+        }
+
+        /*en los click listeners se utliza esto para que regrese al fragment anterior
+        despues de presionar el btn anterior en vez de cerrar la app
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.flFragment, listFragment)
+            ----> addToBackStack(null) <----
+            commit()
+        }
+        */
+
         btnMore = findViewById(R.id.btnMore)
         btnCreateRoute = findViewById(R.id.btnCreateRoute)
 
@@ -43,7 +62,7 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback {
         })
 
         btnCreateRoute.setOnClickListener({
-            startActivity(Intent(this, NewRoute::class.java))
+            startActivity(Intent(this, CreateRoute::class.java))
         })
     }
 

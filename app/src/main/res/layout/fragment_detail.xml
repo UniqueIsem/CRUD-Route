@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/lightGray"
+    tools:context=".fragments.FragmentDetail">
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnCloseFragment"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:backgroundTint="@color/darkRed" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="10dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/routeName"
+            android:text="Name"
+            android:textSize="35sp"
+            android:textColor="@color/black"
+            android:layout_weight="0.5"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/routeRate"
+            android:text="5.0"
+            android:textSize="25sp"
+            android:textColor="@color/black"/>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@android:drawable/star_big_on"
+            android:contentDescription="@string/star_image"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/routeType"
+        android:text="Route type example"
+        android:textSize="15sp"
+        android:textColor="@color/darkGray"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/routeDescription"
+        android:text="This is an example for the route description that we're going to get from the data base"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_marginHorizontal="10dp"/>
+
+    <!--Insert images and video bellow-->
+
+
+</LinearLayout>

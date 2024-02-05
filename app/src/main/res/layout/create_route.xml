@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/darkRed">
+
+    <!-- Google Maps -->
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginBottom="5dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="First Location :"
+            android:textSize="17sp"
+            android:textColor="@color/lightGray"
+            android:layout_marginTop="10dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="latitude:"
+                android:textColor="@color/lightGray"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/routeLatitudeA"
+                android:layout_weight="0.25"
+                android:text="342342"
+                android:textColor="@color/lightGray"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="longitude:"
+                android:textColor="@color/lightGray"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/routeLongitudeA"
+                android:layout_weight="0.25"
+                android:text="324324"
+                android:textColor="@color/lightGray"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Second Location"
+            android:textSize="17sp"
+            android:textColor="@color/lightGray"
+            android:layout_marginTop="10dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="latitude:"
+                android:textColor="@color/lightGray"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/routeLatitudeB"
+                android:layout_weight="0.25"
+                android:text="342342"
+                android:textColor="@color/lightGray"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="longitude:"
+                android:textColor="@color/lightGray"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/routeLongitudeB"
+                android:layout_weight="0.25"
+                android:text="324324"
+                android:textColor="@color/lightGray"/>
+        </LinearLayout>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/createRouteName"
+            android:hint="Route name"
+            android:textColorHint="@color/lightGray"/>
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/routeTypeSpinner"
+            android:background="@color/lightGray"
+            android:layout_marginVertical="10dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/createRouteDescription"
+            android:hint="Description"
+            android:textColorHint="@color/lightGray"
+            android:lines="4"
+            android:gravity="top"
+            android:overScrollMode="always"
+            android:scrollbars="vertical"
+            android:scrollbarStyle="insideInset"
+            android:scrollHorizontally="false"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/createRouteRate"
+            android:hint="Rate"
+            android:textColorHint="@color/lightGray"
+            android:inputType="number"/>
+
+        <!--Implement button to add img/vid-->
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnAddRouteData"
+            android:text="Create Route"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+</LinearLayout>

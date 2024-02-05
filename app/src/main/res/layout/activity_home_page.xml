@@ -11,22 +11,18 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="5dp"/>
 
-    <LinearLayout
-        android:id="@+id/routesBar"
+    <!--Route ListView-->
+    <FrameLayout
+        android:id="@+id/flFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_marginTop="355dp"
+        android:layout_height="wrap_content"/>
 
-        <!--Add a recycler view for the routes-->
-
-    </LinearLayout>
-
-    <!-- Barra de menú horizontal -->
+    <!--Horizontal Menu Bar-->
     <include layout="@layout/bottom_menu"/>
+
 </FrameLayout>
 
 

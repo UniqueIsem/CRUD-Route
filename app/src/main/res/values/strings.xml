@@ -9,4 +9,25 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+    <string name="star_image">star img</string>
+
+    <string-array name="routeTypes">
+        <item>Round Trip</item>
+        <item>2 Days Trip</item>
+        <item>+2 Days Trip</item>
+        <item>Week Trip</item>
+        <item>City to City</item>
+        <item>City to Town</item>
+        <item>City to Beach</item>
+        <item>City to Woods</item>
+        <item>City to Mountain</item>
+        <item>City to Desert</item>
+        <item>City to Jungle</item>
+        <item>Beach Camping</item>
+        <item>Woods Camping</item>
+        <item>Mountain Camping</item>
+        <item>Desert Camping</item>
+        <item>Jungle Camping</item>
+    </string-array>
 </resources>
