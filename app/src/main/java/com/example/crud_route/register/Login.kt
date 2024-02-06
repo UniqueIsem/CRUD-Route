@@ -63,7 +63,6 @@ class Login : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     startActivity(Intent(this, HomePage::class.java))
-                    Toast.makeText(this@Login, "Inicio de sesion exitoso", Toast.LENGTH_SHORT).show()
                     finish()
                 } else {
                     Toast.makeText(this, "Log in failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()

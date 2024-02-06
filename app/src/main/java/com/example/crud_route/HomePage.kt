@@ -2,12 +2,8 @@ package com.example.crud_route
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
-import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.widget.Button
 import androidx.core.app.ActivityCompat
 import com.example.crud_route.fragments.FragmentDetail
@@ -19,13 +15,15 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.PolylineOptions
 
 class HomePage : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var googleMap: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var locationCallback: LocationCallback
     private lateinit var btnMore: Button
     private lateinit var btnCreateRoute: Button
     //private lateinit var btnProfile: Button
@@ -71,22 +69,35 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback {
 
         // Verify and ask for permition and location
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            // Get the last location known
-            fusedLocationClient.lastLocation
-                .addOnSuccessListener { location: Location? ->
-                    location?.let {
-                        // Move camera to the actual location
+            googleMap.isMyLocationEnabled = true
+            val locationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+
+            // Configurate location callback
+            locationCallback = object : LocationCallback() {
+                override fun onLocationResult(locationResult: LocationResult) {
+                    locationResult.lastLocation?.let { location ->
+                        // Move camera to the new location
                         val cameraPosition = CameraPosition.Builder()
-                            .target(LatLng(it.latitude, it.longitude))
+                            .target(LatLng(location.latitude, location.longitude))
                             .zoom(15.0f)
                             .build()
 
                         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
                     }
                 }
+            }
+            //Request location updates
+            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null)
         } else {
             // Ask por location permitions if they are not setted
             ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
         }
     }
+
+    override fun onPause() { //Stop location updates when ncessesary
+        super.onPause()
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
 }
