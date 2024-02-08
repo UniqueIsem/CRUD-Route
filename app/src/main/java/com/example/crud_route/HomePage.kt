@@ -70,6 +70,7 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback {
         // Verify and ask for permition and location
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             googleMap.isMyLocationEnabled = true
+            googleMap.uiSettings.isZoomControlsEnabled = true
             val locationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
 
