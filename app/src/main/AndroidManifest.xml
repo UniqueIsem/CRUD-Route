@@ -17,11 +17,15 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.Route"
         tools:targetApi="31">
-        <activity android:name=".CreateRoute"
-            android:exported="false"
-            android:screenOrientation="portrait"/>
         <activity
-            android:name=".Inclination"
+            android:name=".FileAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".CreateRoute"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".more.Inclination"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

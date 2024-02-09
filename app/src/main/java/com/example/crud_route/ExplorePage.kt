@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.example.crud_route.more.Inclination
 
 class ExplorePage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:background="@color/darkRed">
 
-    <LinearLayout
+    <!-- Google Maps -->
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginBottom="5dp"/>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-
-        <!-- Google Maps -->
-        <fragment
-            android:id="@+id/mapFragment"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_marginBottom="5dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,7 +46,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/routeLatitudeA"
                     android:layout_weight="0.25"
-                    android:text="342342"
                     android:textColor="@color/lightGray"/>
                 <TextView
                     android:layout_width="match_parent"
@@ -58,7 +58,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/routeLongitudeA"
                     android:layout_weight="0.25"
-                    android:text="324324"
                     android:textColor="@color/lightGray"/>
             </LinearLayout>
 
@@ -84,7 +83,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/routeLatitudeB"
                     android:layout_weight="0.25"
-                    android:text="342342"
                     android:textColor="@color/lightGray"/>
                 <TextView
                     android:layout_width="match_parent"
@@ -97,7 +95,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/routeLongitudeB"
                     android:layout_weight="0.25"
-                    android:text="324324"
                     android:textColor="@color/lightGray"/>
             </LinearLayout>
 
@@ -106,7 +103,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/createRouteName"
                 android:hint="Route name"
-                android:textColorHint="@color/lightGray"/>
+                android:textColorHint="@color/lightGray"
+                style="@style/EditTextWhite"/>
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -124,16 +122,63 @@
                 android:overScrollMode="always"
                 android:scrollbars="vertical"
                 android:scrollbarStyle="insideInset"
-                android:scrollHorizontally="false"/>
-            <EditText
+                android:scrollHorizontally="false"
+                style="@style/EditTextWhite"/>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/createRouteRate"
-                android:hint="Rate"
-                android:textColorHint="@color/lightGray"
-                android:inputType="number"/>
+                android:orientation="horizontal">
+                <ImageButton
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="0.2"
+                    android:id="@+id/rateStar1"
+                    android:src="@android:drawable/btn_star_big_off"
+                    android:backgroundTint="@color/darkRed"/>
+                <ImageButton
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="0.2"
+                    android:id="@+id/rateStar2"
+                    android:src="@android:drawable/btn_star_big_off"
+                    android:backgroundTint="@color/darkRed"/>
+                <ImageButton
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="0.2"
+                    android:id="@+id/rateStar3"
+                    android:src="@android:drawable/btn_star_big_off"
+                    android:backgroundTint="@color/darkRed"/>
+                <ImageButton
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="0.2"
+                    android:id="@+id/rateStar4"
+                    android:src="@android:drawable/btn_star_big_off"
+                    android:backgroundTint="@color/darkRed"/>
+                <ImageButton
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="0.2"
+                    android:id="@+id/rateStar5"
+                    android:src="@android:drawable/btn_star_big_off"
+                    android:backgroundTint="@color/darkRed"/>
+            </LinearLayout>
 
-            <!--Implement button to add img/vid-->
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnSelectFile"
+                android:text="Select Files"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/recycler_view_img"
+                app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
+                android:orientation="horizontal"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -146,6 +191,6 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
-</ScrollView>
+</LinearLayout>

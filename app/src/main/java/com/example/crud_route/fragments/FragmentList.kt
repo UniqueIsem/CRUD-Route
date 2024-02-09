@@ -5,13 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.TextView
-import com.example.crud_route.Adapter
+import com.example.crud_route.route.Adapter
 import com.example.crud_route.R
-import com.example.crud_route.Route
-import com.example.crud_route.daoRoute
+import com.example.crud_route.route.Route
+import com.example.crud_route.route.daoRoute
 
 class FragmentList : Fragment() {
     lateinit var dao: daoRoute
@@ -28,7 +27,8 @@ class FragmentList : Fragment() {
         dao = daoRoute(requireContext())
         list = dao.viewAll() ?: ArrayList()
 
-        adapter = Adapter(requireActivity(), list, dao)
+        adapter =
+            Adapter(requireActivity(), list, dao)
         val listView: ListView = rootView.findViewById(R.id.routeListView)
         listView.adapter = adapter
 

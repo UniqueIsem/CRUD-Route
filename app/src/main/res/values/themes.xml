@@ -21,4 +21,15 @@
         <item name="windowSplashScreenAnimatedIcon">@drawable/motocicletablack</item>
         <item name="postSplashScreenTheme">@style/Base.Theme.Route</item>
     </style>
+
+    <style name="EditTextRegister" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="EditTextWhite" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">#E0E0E0</item>
+        <item name="android:backgroundTint">#E0E0E0</item>
+        <item name="android:textColorHint">#E0E0E0</item>
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>

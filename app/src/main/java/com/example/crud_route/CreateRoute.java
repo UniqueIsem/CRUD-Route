@@ -7,6 +7,9 @@ import com.codebyashish.googledirectionapi.ErrorHandling;
 import com.codebyashish.googledirectionapi.RouteDrawing;
 import com.codebyashish.googledirectionapi.RouteInfoModel;
 import com.codebyashish.googledirectionapi.RouteListener;
+import com.example.crud_route.route.Adapter;
+import com.example.crud_route.route.Route;
+import com.example.crud_route.route.daoRoute;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -15,9 +18,12 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.RoundCap;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -25,12 +31,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -52,11 +64,15 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
     private LatLng destinationLocation, userLocation;
     daoRoute dao;
     Adapter adapter;
+    private static final int PICK_FILE_REQUEST_CODE = 1;
     ArrayList<Route> list;
+    ArrayList<String> fileUris = new ArrayList<>();
+    private FileAdapter fileAdapter;
     ArrayList<Polyline> polyline = null;
     private ProgressDialog dialog;
     Route r;
     String type;
+    int rate = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +106,54 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
         TextView latB = findViewById(R.id.routeLatitudeB);
         TextView longB = findViewById(R.id.routeLongitudeB);
         EditText name = findViewById(R.id.createRouteName);
+        //Get value from rate
+        ImageButton rateStar1 = findViewById(R.id.rateStar1);
+        ImageButton rateStar2 = findViewById(R.id.rateStar2);
+        ImageButton rateStar3 = findViewById(R.id.rateStar3);
+        ImageButton rateStar4 = findViewById(R.id.rateStar4);
+        ImageButton rateStar5 = findViewById(R.id.rateStar5);
+        View.OnClickListener starClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v.getId() == R.id.rateStar1) {
+                    rate = 1;
+                } else if (v.getId() == R.id.rateStar2) {
+                    rate = 2;
+                } else if (v.getId() == R.id.rateStar3) {
+                    rate = 3;
+                } else if (v.getId() == R.id.rateStar4) {
+                    rate = 4;
+                } else if (v.getId() == R.id.rateStar5) {
+                    rate = 5;
+                }
+                updateStarIcons();
+            }
+
+            private void updateStarIcons() {
+                rateStar1.setImageDrawable(getResources().getDrawable(android.R.drawable.btn_star_big_off));
+                rateStar2.setImageDrawable(getResources().getDrawable(android.R.drawable.btn_star_big_off));
+                rateStar3.setImageDrawable(getResources().getDrawable(android.R.drawable.btn_star_big_off));
+                rateStar4.setImageDrawable(getResources().getDrawable(android.R.drawable.btn_star_big_off));
+                rateStar5.setImageDrawable(getResources().getDrawable(android.R.drawable.btn_star_big_off));
+                switch (rate) {
+                    case 5:
+                        rateStar5.setImageDrawable(getResources().getDrawable(android.R.drawable.btn_star_big_on));
+                    case 4:
+                        rateStar4.setImageDrawable(getResources().getDrawable(android.R.drawable.btn_star_big_on));
+                    case 3:
+                        rateStar3.setImageDrawable(getResources().getDrawable(android.R.drawable.btn_star_big_on));
+                    case 2:
+                        rateStar2.setImageDrawable(getResources().getDrawable(android.R.drawable.btn_star_big_on));
+                    case 1:
+                        rateStar1.setImageDrawable(getResources().getDrawable(android.R.drawable.btn_star_big_on));
+                }
+            }
+        };
+        rateStar1.setOnClickListener(starClickListener);
+        rateStar2.setOnClickListener(starClickListener);
+        rateStar3.setOnClickListener(starClickListener);
+        rateStar4.setOnClickListener(starClickListener);
+        rateStar5.setOnClickListener(starClickListener);
 
         // Get values from Spinner
         Spinner typeSpinner = findViewById(R.id.routeTypeSpinner);
@@ -98,7 +162,24 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
         typeSpinner.setAdapter(adapter);
 
         EditText description = findViewById(R.id.createRouteDescription);
-        EditText rate = findViewById(R.id.createRouteName);
+        // Select Files (Img/Video)
+        Button btnSelectFile = findViewById(R.id.btnSelectFile);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_img);
+
+        btnSelectFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { //Open galerry
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");
+                intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/*", "video/*"});
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                startActivityForResult(intent, PICK_FILE_REQUEST_CODE);
+            }
+        });
+        fileAdapter = new FileAdapter(fileUris);
+        recyclerView.setAdapter(fileAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+
         Button btnAddRouteData = findViewById(R.id.btnAddRouteData);
 
         // Save data into Route DB-SQLite
@@ -113,7 +194,7 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
                             name.getText().toString(),
                             getType(),
                             description.getText().toString(),
-                            Double.parseDouble(rate.getText().toString()));
+                            rate);
                     dao.insert(r);
                     adapter.notifyDataSetChanged();
                     finish();
@@ -260,12 +341,11 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
 
     @Override
     public void onRouteStart() {
-        Toast.makeText(this, "Route Started", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void onRouteSuccess(ArrayList<RouteInfoModel> list, int indexing) {
-        Toast.makeText(this, "Route Success", Toast.LENGTH_SHORT).show();
         PolylineOptions polylineOptions = new PolylineOptions();
         ArrayList<Polyline> polylines = new ArrayList<>();
         for (int i = 0 ; i < list.size() ; i++) {
@@ -283,6 +363,26 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
 
     @Override
     public void onRouteCancelled() {
-        Toast.makeText(this, "Route Canceled", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_FILE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                if (data.getClipData() != null) {
+                    int count = data.getClipData().getItemCount();
+                    for (int i = 0; i < count; i++) {
+                        Uri uri = data.getClipData().getItemAt(i).getUri();
+                        fileUris.add(uri.toString()); // Guardar URI en la lista
+                    }
+                } else if (data.getData() != null) {
+                    Uri uri = data.getData();
+                    fileUris.add(uri.toString()); // Guardar URI en la lista
+                }
+                fileAdapter.notifyDataSetChanged(); // Notificar al adaptador sobre el cambio en los datos
+            }
+        }
     }
 }

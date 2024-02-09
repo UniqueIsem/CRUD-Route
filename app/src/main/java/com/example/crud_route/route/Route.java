@@ -1,4 +1,4 @@
-package com.example.crud_route;
+package com.example.crud_route.route;
 
 public class Route {
     int id;

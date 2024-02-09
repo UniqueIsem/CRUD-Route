@@ -1,4 +1,4 @@
-package com.example.crud_route
+package com.example.crud_route.more
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,9 +7,9 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.util.Log
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.crud_route.R
 
 class Inclination : AppCompatActivity(), SensorEventListener {
     private lateinit var sensorManager: SensorManager
@@ -79,9 +79,15 @@ class Inclination : AppCompatActivity(), SensorEventListener {
         val goodInclination = -40.0f
 
         when {
-            pitch >= mediumInclination && pitch <= badInclination -> inclinationBackground.setBackgroundColor(resources.getColor(R.color.red))
-            pitch >= goodInclination && pitch <= mediumInclination -> inclinationBackground.setBackgroundColor(resources.getColor(R.color.yellow))
-            pitch <= goodInclination -> inclinationBackground.setBackgroundColor(resources.getColor(R.color.green))
+            pitch >= mediumInclination && pitch <= badInclination -> inclinationBackground.setBackgroundColor(resources.getColor(
+                R.color.red
+            ))
+            pitch >= goodInclination && pitch <= mediumInclination -> inclinationBackground.setBackgroundColor(resources.getColor(
+                R.color.yellow
+            ))
+            pitch <= goodInclination -> inclinationBackground.setBackgroundColor(resources.getColor(
+                R.color.green
+            ))
         }
         inclinationBackground.invalidate()
     }
