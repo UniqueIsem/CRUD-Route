@@ -57,7 +57,7 @@ public class Adapter extends BaseAdapter {
 
         name.setText(r.getName());
         type.setText(r.getType());
-        rate.setText((int) r.getRate());
+        rate.setText("" + r.getRate());
         update.setTag(position);
         delete.setTag(position);
 

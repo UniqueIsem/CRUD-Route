@@ -166,6 +166,7 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
         Button btnSelectFile = findViewById(R.id.btnSelectFile);
         RecyclerView recyclerView = findViewById(R.id.recycler_view_img);
 
+
         btnSelectFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { //Open galerry
@@ -176,7 +177,7 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
                 startActivityForResult(intent, PICK_FILE_REQUEST_CODE);
             }
         });
-        fileAdapter = new FileAdapter(fileUris);
+        fileAdapter = new FileAdapter(CreateRoute.this, fileUris);
         recyclerView.setAdapter(fileAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
@@ -194,9 +195,12 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
                             name.getText().toString(),
                             getType(),
                             description.getText().toString(),
-                            rate);
+                            rate,
+                            fileUris);
                     dao.insert(r);
+                    list = dao.viewAll();
                     adapter.notifyDataSetChanged();
+                    Toast.makeText(getApplication(), "Route Created", Toast.LENGTH_SHORT).show();
                     finish();
                 } catch (Exception e) {
                     Toast.makeText(getApplication(), "ERROR", Toast.LENGTH_SHORT).show();
@@ -375,13 +379,15 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
                     int count = data.getClipData().getItemCount();
                     for (int i = 0; i < count; i++) {
                         Uri uri = data.getClipData().getItemAt(i).getUri();
-                        fileUris.add(uri.toString()); // Guardar URI en la lista
+                        fileUris.add(uri.toString()); // Save URI on list
                     }
                 } else if (data.getData() != null) {
                     Uri uri = data.getData();
-                    fileUris.add(uri.toString()); // Guardar URI en la lista
+                    fileUris.add(uri.toString()); // Save URI on list
+                } else {
+                    Toast.makeText(this, "Upload files please", Toast.LENGTH_SHORT).show();
                 }
-                fileAdapter.notifyDataSetChanged(); // Notificar al adaptador sobre el cambio en los datos
+                fileAdapter.notifyDataSetChanged(); // Notify adapter about change in data
             }
         }
     }

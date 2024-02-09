@@ -1,15 +1,17 @@
 package com.example.crud_route.route;
 
+import java.util.ArrayList;
+
 public class Route {
     int id;
     double latA, longA, latB, longB, rate;
     String name, type, description;
-
+    ArrayList<String> filePaths;
     public Route() {
 
     }
 
-    public Route(double latA, double longA, double latB, double longB, String name, String type, String description, double rate) {
+    public Route(double latA, double longA, double latB, double longB, String name, String type, String description, double rate, ArrayList<String> filePaths) {
         this.latA = latA;
         this.longA = longA;
         this.latB = latB;
@@ -18,9 +20,10 @@ public class Route {
         this.name = name;
         this.type = type;
         this.description = description;
+        this.filePaths = filePaths;
     }
 
-    public Route(int id, double latA, double longA, double latB, double longB, String name, String type, String description, double rate) {
+    public Route(int id, double latA, double longA, double latB, double longB, String name, String type, String description, double rate, ArrayList<String> filePaths) {
         this.id = id;
         this.latA = latA;
         this.longA = longA;
@@ -30,6 +33,7 @@ public class Route {
         this.type = type;
         this.description = description;
         this.rate = rate;
+        this.filePaths = filePaths;
     }
 
     public int getId() {
@@ -102,6 +106,12 @@ public class Route {
 
     public void setRate(double rate) {
         this.rate = rate;
+    }
+
+    public ArrayList<String> getFilePaths() { return filePaths; }
+
+    public void setFilePaths(ArrayList<String> filePaths) {
+        this.filePaths = filePaths;
     }
 }
 

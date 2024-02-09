@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
-    android:layout_height="200dp"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@id/imageView"
-    android:scaleType="centerCrop">
+    tools:context=".CreateRoute">
 
-</ImageView>
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        android:layout_marginHorizontal="5dp"/>
+    <VideoView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/videoView"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        android:layout_marginHorizontal="5dp"/>
+</RelativeLayout>
