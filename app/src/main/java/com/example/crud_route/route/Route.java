@@ -1,8 +1,14 @@
 package com.example.crud_route.route;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Route {
+public class Route implements Parcelable {
     int id;
     double latA, longA, latB, longB, rate;
     String name, type, description;
@@ -16,10 +22,10 @@ public class Route {
         this.longA = longA;
         this.latB = latB;
         this.longB = longB;
-        this.rate = rate;
         this.name = name;
         this.type = type;
         this.description = description;
+        this.rate = rate;
         this.filePaths = filePaths;
     }
 
@@ -112,6 +118,24 @@ public class Route {
 
     public void setFilePaths(ArrayList<String> filePaths) {
         this.filePaths = filePaths;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int i) {
+        dest.writeDouble(latA);
+        dest.writeDouble(longA);
+        dest.writeDouble(latB);
+        dest.writeDouble(longB);
+        dest.writeString(name);
+        dest.writeString(type);
+        dest.writeString(description);
+        dest.writeDouble(rate);
+        //dest.write filePaths
     }
 }
 

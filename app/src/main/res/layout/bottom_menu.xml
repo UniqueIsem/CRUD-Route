@@ -10,10 +10,10 @@
     <Button
         android:id="@+id/btnMore"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_weight="1"
         android:backgroundTint="@color/darkRed"
-        android:text="..."
+        android:background="@drawable/inclinacion"
         android:textSize="30sp"
         android:textColor="@color/lightGray"
         android:layout_gravity="center"
@@ -23,7 +23,7 @@
         android:id="@+id/btnCreateRoute"
         android:layout_width="10dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:backgroundTint="@color/lightGray"
         android:text="+"
         android:textSize="30sp"
@@ -33,13 +33,12 @@
         />
 
     <Button
-        android:id="@+id/inProcess"
+        android:id="@+id/btnProfile"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_weight="1"
         android:backgroundTint="@color/darkRed"
-        android:text="profile"
-        android:textSize="15sp"
+        android:background="@drawable/bikerblack"
         android:textColor="@color/lightGray"
         android:layout_gravity="center" />
 </LinearLayout>

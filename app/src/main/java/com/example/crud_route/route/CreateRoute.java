@@ -1,4 +1,4 @@
-package com.example.crud_route;
+package com.example.crud_route.route;
 
 import android.Manifest;
 
@@ -7,9 +7,7 @@ import com.codebyashish.googledirectionapi.ErrorHandling;
 import com.codebyashish.googledirectionapi.RouteDrawing;
 import com.codebyashish.googledirectionapi.RouteInfoModel;
 import com.codebyashish.googledirectionapi.RouteListener;
-import com.example.crud_route.route.Adapter;
-import com.example.crud_route.route.Route;
-import com.example.crud_route.route.daoRoute;
+import com.example.crud_route.R;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -25,14 +23,13 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,9 +54,6 @@ import java.util.ArrayList;
 public class CreateRoute extends AppCompatActivity implements AdapterView.OnItemSelectedListener, OnMapReadyCallback, RouteListener {
     private GoogleMap map;
     public static int LOCATION_REQUEST_CODE = 100;
-    Handler handler;
-    long refreshTime = 5000;
-    Runnable runnable;
     private FusedLocationProviderClient fusedLocationClient;
     private LatLng destinationLocation, userLocation;
     daoRoute dao;
@@ -68,7 +62,6 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
     ArrayList<Route> list;
     ArrayList<String> fileUris = new ArrayList<>();
     private FileAdapter fileAdapter;
-    ArrayList<Polyline> polyline = null;
     private ProgressDialog dialog;
     Route r;
     String type;
@@ -90,15 +83,6 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
         dialog = new ProgressDialog(CreateRoute.this);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        // Refresh location to get it continuously
-        /*handler = new Handler();
-        handler.postDelayed(runnable = new Runnable() {
-            @Override
-            public void run() {
-                handler.postDelayed(runnable, refreshTime);
-                checkLocationPermission();
-            }
-        }, refreshTime);*/
         checkLocationPermission();
 
         TextView latA = findViewById(R.id.routeLatitudeA);
@@ -147,6 +131,7 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
                     case 1:
                         rateStar1.setImageDrawable(getResources().getDrawable(android.R.drawable.btn_star_big_on));
                 }
+                Toast.makeText(getApplication(), "rate: " + rate, Toast.LENGTH_SHORT).show();
             }
         };
         rateStar1.setOnClickListener(starClickListener);
@@ -160,16 +145,17 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.routeTypes, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeSpinner.setAdapter(adapter);
+        typeSpinner.setOnItemSelectedListener(this);
 
         EditText description = findViewById(R.id.createRouteDescription);
         // Select Files (Img/Video)
         Button btnSelectFile = findViewById(R.id.btnSelectFile);
         RecyclerView recyclerView = findViewById(R.id.recycler_view_img);
 
-
+        //Select videos or images
         btnSelectFile.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { //Open galerry
+            public void onClick(View view) { //Open galery
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("*/*");
                 intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/*", "video/*"});
@@ -193,17 +179,17 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
                             Double.parseDouble(latB.getText().toString()),
                             Double.parseDouble(longB.getText().toString()),
                             name.getText().toString(),
-                            getType(),
+                            type,
                             description.getText().toString(),
                             rate,
                             fileUris);
                     dao.insert(r);
-                    list = dao.viewAll();
                     adapter.notifyDataSetChanged();
-                    Toast.makeText(getApplication(), "Route Created", Toast.LENGTH_SHORT).show();
+                    Log.d("ISEM", "Route created");
                     finish();
+                    list = dao.viewAll();
                 } catch (Exception e) {
-                    Toast.makeText(getApplication(), "ERROR", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplication(), "ERROR" + e, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -264,25 +250,6 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
                 getUserLocation();
             }
         }
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-        String text = adapterView.getItemAtPosition(position).toString();
-        setType(text);
-    }
-
-    public void setType(String typeS) {
-        this.type = typeS;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
     }
 
     @Override
@@ -391,4 +358,16 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
             }
         }
     }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+        String text = adapterView.getItemAtPosition(position).toString();
+        type = text;
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
 }

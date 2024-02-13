@@ -1,4 +1,4 @@
-package com.example.crud_route;
+package com.example.crud_route.route;
 
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -7,11 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 import android.widget.VideoView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.example.crud_route.R;
+
 import java.util.ArrayList;
 
 public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder> {
