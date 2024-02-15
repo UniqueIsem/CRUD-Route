@@ -5,20 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- Google Maps -->
-    <fragment
-        android:id="@+id/mapFragment"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:layout_marginBottom="5dp"/>
-
     <!--Route ListView-->
     <FrameLayout
         android:id="@+id/flFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="355dp"
         android:layout_marginBottom="65dp"/>
 
     <!--Horizontal Menu Bar-->

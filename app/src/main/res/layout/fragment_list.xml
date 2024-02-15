@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightGray"
-    tools:context=".fragments.FragmentList">
+    tools:context=".RouteList">
 
     <TextView
         android:layout_width="match_parent"
@@ -12,6 +12,7 @@
         android:textSize="20sp"
         android:textColor="@color/darkRed"
         android:gravity="center"
+        android:layout_gravity="center"
         android:id="@+id/emptyListMsg"/>
     <ListView
         android:id="@+id/routeListView"

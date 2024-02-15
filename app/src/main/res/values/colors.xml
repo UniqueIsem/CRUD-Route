@@ -10,7 +10,8 @@
     <color name="red">#ee0e0e</color>
     <color name="lightRed">#ee4242</color>
 
-    <!--Inclination Minigame Colors-->
+    <!--Other Colors-->
     <color name="green">#2ecc71</color>
     <color name="yellow">#ffc300</color>
+    <color name="blue">#4a9ae9</color>
 </resources>

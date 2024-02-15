@@ -1,67 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginBottom="5dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/darkGray"
+    android:padding="5dp"
+    tools:context=".fragments.FragmentDetail">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:background="@color/lightGray">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:padding="10dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/routeName"
-                android:text="Name"
-                android:textColor="@color/black"
-                android:textSize="25sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/routeType"
-                android:text="Camping on the beach"
-                android:textColor="@color/black"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.8"
-            android:layout_gravity="center"
-            android:gravity="center"
+            android:orientation="horizontal"
             android:background="@color/darkGray"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/routeRate"
-                android:textSize="25sp"
-                android:textColor="@color/lightGray"/>
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@android:drawable/star_big_on"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.7"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_gravity="bottom">
 
             <ImageButton
                 android:id="@+id/routeUpdate"
@@ -77,9 +35,92 @@
                 android:layout_weight="0.5"
                 android:background="@color/red"
                 app:srcCompat="@android:drawable/ic_menu_delete" />
+            <ImageButton
+                android:id="@+id/routeDirections"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@color/blue"
+                app:srcCompat="@android:drawable/ic_menu_directions" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp"
+            android:background="@color/darkRed"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/routeName"
+                android:text="Name"
+                android:textSize="35sp"
+                android:textColor="@color/black"
+                android:layout_weight="0.5"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/routeRate"
+                android:text="rate"
+                android:textSize="25sp"
+                android:textColor="@color/black"/>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@android:drawable/star_big_on"
+                android:contentDescription="@string/star_image"/>
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/routeType"
+            android:text="Route type example"
+            android:textSize="15sp"
+            android:textColor="@color/darkGray"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/routeDescription"
+            android:text="This is an example for the route description that we're going to get from the data base"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_marginHorizontal="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="10dp">
+            <TextView
+                android:id="@+id/routeLatitudeB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:textSize="11sp"
+                android:textColor="@color/lightGray"/>
+            <TextView
+                android:id="@+id/routeLongitudeB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:textSize="11sp"
+                android:textColor="@color/lightGray"/>
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recycler_view_img"
+            app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
+            android:orientation="horizontal"/>
+
     </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>

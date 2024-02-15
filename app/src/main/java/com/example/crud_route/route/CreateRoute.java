@@ -142,9 +142,9 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
 
         // Get values from Spinner
         Spinner typeSpinner = findViewById(R.id.routeTypeSpinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.routeTypes, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        typeSpinner.setAdapter(adapter);
+        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.routeTypes, android.R.layout.simple_spinner_item);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        typeSpinner.setAdapter(arrayAdapter);
         typeSpinner.setOnItemSelectedListener(this);
 
         EditText description = findViewById(R.id.createRouteDescription);
@@ -155,7 +155,7 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
         //Select videos or images
         btnSelectFile.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { //Open galery
+            public void onClick(View view) { //Open gallery
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("*/*");
                 intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/*", "video/*"});
@@ -185,7 +185,6 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
                             fileUris);
                     dao.insert(r);
                     adapter.notifyDataSetChanged();
-                    Log.d("ISEM", "Route created");
                     finish();
                     list = dao.viewAll();
                 } catch (Exception e) {
@@ -224,7 +223,6 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
 
                     //Update TextView values of latA and longA
                     userLocation = new LatLng(userLat, userLong);
-                    LatLng userLocation = new LatLng(userLat, userLong);
 
                     map.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
                     map.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
