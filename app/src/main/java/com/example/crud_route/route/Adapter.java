@@ -65,14 +65,6 @@ public class Adapter extends BaseAdapter {
         return r.getId();
     }
 
-    public Double getLatitudeB() {
-        return r.getLatB();
-    }
-
-    public Double getLongitudeB() {
-        return r.getLongB();
-    }
-
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
         View v = view;

@@ -1,4 +1,4 @@
-package com.example.crud_route
+package com.example.crud_route.route
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import android.widget.TextView
-import com.example.crud_route.route.Adapter
-import com.example.crud_route.route.Route
-import com.example.crud_route.route.daoRoute
+import com.example.crud_route.R
 
 class RouteList : Fragment() {
     lateinit var dao: daoRoute

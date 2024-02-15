@@ -184,9 +184,9 @@ public class CreateRoute extends AppCompatActivity implements AdapterView.OnItem
                             rate,
                             fileUris);
                     dao.insert(r);
+                    list = dao.viewAll();
                     adapter.notifyDataSetChanged();
                     finish();
-                    list = dao.viewAll();
                 } catch (Exception e) {
                     Toast.makeText(getApplication(), "ERROR" + e, Toast.LENGTH_LONG).show();
                 }

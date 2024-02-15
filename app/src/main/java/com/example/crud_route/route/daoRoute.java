@@ -93,7 +93,6 @@ public class daoRoute {
                         cursor.getDouble(8), //rate
                         cursor.getExtras().getStringArrayList(String.valueOf(9))
                         ));
-                Log.d("ISEM", list.toString());
             } while (cursor.moveToNext());
         }
         return list;
