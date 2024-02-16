@@ -17,14 +17,20 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.crud_route.HomePage;
+import com.example.crud_route.ItemFileAdapter;
 import com.example.crud_route.Map;
 import com.example.crud_route.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Adapter extends BaseAdapter {
     ArrayList<Route> list;
+    ArrayList<String> imageUrls;
     daoRoute dao;
     Route r;
     Activity a;
@@ -47,6 +53,9 @@ public class Adapter extends BaseAdapter {
         this.dao = dao;
         this.homePage = homePage;
     }
+    public Adapter(ArrayList<String> urls) {
+        this.imageUrls = urls;
+    }
 
     @Override
     public int getCount() {
@@ -56,7 +65,7 @@ public class Adapter extends BaseAdapter {
     @Override
     public Route getItem(int i) {
         r = list.get(i);
-        return null;
+        return r;
     }
 
     @Override
@@ -72,6 +81,11 @@ public class Adapter extends BaseAdapter {
             LayoutInflater li = (LayoutInflater) a.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = li.inflate(R.layout.item_route, null);
         }
+        RecyclerView recyclerView = v.findViewById(R.id.recycler_view_img);
+        List<String> imageUrls = getItem(position).getFilePaths();
+        ItemFileAdapter itemFileAdapter = new ItemFileAdapter(a, imageUrls);
+        recyclerView.setAdapter(itemFileAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(a, RecyclerView.HORIZONTAL, false));
         r = list.get(position);
         // Initialization of tags from selected item_route
         TextView latA = v.findViewById(R.id.routeLatitudeA);
@@ -100,7 +114,7 @@ public class Adapter extends BaseAdapter {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int pos = Integer.parseInt(view.getTag().toString());
+                final int pos = Integer.parseInt(view.getTag().toString());
                 final Dialog dialog = new Dialog(a);
                 dialog.setTitle("Update Route");
                 dialog.setCancelable(true);
@@ -143,7 +157,7 @@ public class Adapter extends BaseAdapter {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int pos = Integer.parseInt(view.getTag().toString());
+                final int pos = Integer.parseInt(view.getTag().toString());
                 r = list.get(pos);
                 setId(r.getId());
                 AlertDialog.Builder del = new AlertDialog.Builder(a);
@@ -176,5 +190,10 @@ public class Adapter extends BaseAdapter {
             }
         });
         return v;
+    }
+
+    public void viewAllRoutes() {
+        list = dao.viewAll();
+        notifyDataSetChanged();
     }
 }

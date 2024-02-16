@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <!--Route ListView-->
@@ -10,7 +10,19 @@
         android:id="@+id/flFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="65dp"/>
+        android:layout_marginBottom="70dp"/>
+    <Button
+        android:id="@+id/btnLoadRoutes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="L O A D   R O U T E S"
+        android:textSize="11sp"
+        android:textColor="@color/red"
+        android:backgroundTint="@color/darkGray"
+        app:cornerRadius="5dp"
+        android:layout_gravity="bottom"
+        android:paddingVertical="0dp"
+        android:layout_marginBottom="59dp"/>
 
     <!--Horizontal Menu Bar-->
     <include layout="@layout/bottom_menu"/>

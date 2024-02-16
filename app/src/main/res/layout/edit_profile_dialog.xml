@@ -17,7 +17,6 @@
             android:layout_height="150dp"
             android:src="@drawable/bikerblack"
             android:scaleType="centerCrop"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,6 +43,8 @@
                 android:textColor="@color/white"
                 android:backgroundTint="@color/red"/>
         </LinearLayout>
+
+
 
         <EditText
             android:id="@+id/editUserName"

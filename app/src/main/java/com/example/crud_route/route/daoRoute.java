@@ -7,8 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.sax.ElementListener;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class daoRoute {
     SQLiteDatabase db;
@@ -53,6 +55,8 @@ public class daoRoute {
         String filePathsString = TextUtils.join(",", r.getFilePaths());
         container.put("filePaths", filePathsString);
 
+        Toast.makeText(ct.getApplicationContext(), filePathsString.toString(), Toast.LENGTH_LONG).show();
+
         return (db.insert("route", null, container)) > 0;
     }
 
@@ -82,6 +86,8 @@ public class daoRoute {
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
             do {
+                String filePathString = cursor.getString(9);
+                ArrayList<String> filePaths = new ArrayList<>(Arrays.asList(filePathString.split(",")));
                 list.add(new Route(cursor.getInt(0), //id
                         cursor.getDouble(1), //latA
                         cursor.getDouble(2), //longA
@@ -91,7 +97,7 @@ public class daoRoute {
                         cursor.getString(6), //type
                         cursor.getString(7), //description
                         cursor.getDouble(8), //rate
-                        cursor.getExtras().getStringArrayList(String.valueOf(9))
+                        filePaths
                         ));
             } while (cursor.moveToNext());
         }

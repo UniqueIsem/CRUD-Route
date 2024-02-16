@@ -23,6 +23,32 @@
                 android:layout_height="150dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/bikerblack" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btnTakeProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PHOTO"
+                    android:textSize="20sp"
+                    android:layout_marginHorizontal="5dp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/green"/>
+                <Button
+                    android:id="@+id/btnDeleteProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DELETE"
+                    android:textSize="20sp"
+                    android:layout_marginHorizontal="5dp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/red"/>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/userName"
@@ -31,7 +57,7 @@
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
-                android:text="Username"
+                android:text="Isaac Santos"
                 android:textColor="@color/lightGray"
                 android:textSize="40sp" />
 
@@ -51,7 +77,7 @@
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:text="Motorcycle"
+                android:text="Dominar 400cc"
                 android:textColor="@color/lightGray"
                 android:textSize="30sp" />
 
@@ -60,11 +86,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginHorizontal="24dp"
-                android:text="User Description"
+                android:text="Im Isaac Emmanuel Santos Ramos, Software Development student in CETI colomos"
                 android:textColor="@color/lightGray"
                 android:textSize="20sp" />
 
-            <Button
+            <!--<Button
                 android:id="@+id/btnEditProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,8 +98,7 @@
                 android:layout_marginTop="200dp"
 
                 android:backgroundTint="@color/black"
-                android:text="E D I T    P R O F I L E" />
-
+                android:text="E D I T    P R O F I L E" />-->
 
         </LinearLayout>
 
